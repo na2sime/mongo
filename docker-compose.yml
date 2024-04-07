@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  mongo1:
+    image: mongo
+    container_name: mongo1
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db1:/data/db
+    networks:
+      - mongo-network
+    command: "--replSet rs0"
+
+  mongo2:
+    image: mongo
+    container_name: mongo2
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./data/db2:/data/db
+    networks:
+      - mongo-network
+    command: "--replSet rs0"
+
+  mongo3:
+    image: mongo
+    container_name: mongo3
+    ports:
+      - "27019:27017"
+    volumes:
+      - ./data/db3:/data/db
+    networks:
+      - mongo-network
+    command: "--replSet rs0"
+
+networks:
+  mongo-network:
+    driver: bridge
